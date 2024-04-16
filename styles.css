@@ -1,0 +1,155 @@
+/* * does not cover pseudo-elements */
+*, *::before, *::after {
+  /* if we set an element's width to 100 pixels
+  content-box: 100 pixels + width of any border or padding, resulting in >= 100 pixels
+  border-box: content + width of any border or padding = 100 pixels */
+  box-sizing: border-box;
+  /* Fallback fonts: a list of similar "backup fonts" in the font-family property 
+  Always end the list with a generic font family name 
+  Antonym: Web safe fonts, but no 100% completely web safe fonts*/
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+/* For color reuse*/
+:root {
+  --light-brown: 34, 100%, 97%;
+  --brown: 34, 37%, 57%;
+  --dark-brown: 34, 31%, 21%;
+  --green: 100, 60%, 50%;
+  --red: 0, 60%, 50%;
+  --dark-green: 100, 60%, 25%;
+  --dark-red: 0, 60%, 25%;
+}
+
+body {
+  margin: 0;
+}
+
+.full-screen-container {
+  background-image: url("background.jpg");
+  /* dvh, lvh, svh buat mobile apps */
+  /* 1vw = 1% of the viewport width. */
+  height: 100vh;
+  width: 100vw;
+  /* Minimize stretch */
+  background-size: cover;
+  background-position: center;
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/display */
+  display: flex;
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content */
+  /* For flex items, tengahny dr kiri ke kanan (on the main axis) */
+  justify-content: end;
+  /* Tengahny dr atas ke bawah (on the cross axis)*/
+  align-items: center;
+}
+ 
+.login-container {
+  /* Margin: whitespace available surrounding an element */
+  margin-top: 3%;
+  margin-right: 10%;
+  background-color: hsl(var(--light-brown), .4);
+  /* x y blur-radius spread-radius */
+  box-shadow: 0 0 20px 0 hsl(var(--dark-brown));
+  width: 25%;
+  max-width: 500px;
+  /* Padding: amount of inner space an element has */
+  padding: 20px;
+  /* Soften the edge */
+  border-radius: 20px;
+}
+
+.login-title {
+  margin: 0;
+  color: hsl(var(--dark-brown));
+  text-align: center;
+  /* 1rem = font size of the html element (usually has a default value of 16px) */
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.input-group label {
+  color: hsl(var(--dark-brown));
+  margin-top: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.input-group input {
+  font-size: 1rem;
+  color: hsl(var(--dark-brown), .8);
+  font-weight: lighter;
+  /* em units are relative to the font size of their own element, not the root element */
+  padding: .5em;
+  background-color: hsl(var(--light-brown), .8);
+  border: none;
+  /* outline outside the border */
+  outline: none;
+  border-radius: 0.5em;
+}
+
+.input-group.success input {
+  box-shadow: 0 0 0 2px hsl(var(--green));
+}
+
+.input-group.fail input {
+  box-shadow: 0 0 0 2px hsl(var(--red));
+}
+
+.input-group .message {
+  /* klo pke display: none size login box nya berubah klo mau di display */
+  /* display: none; */
+  visibility: hidden;
+  font-size: 1rem;
+}
+
+.input-group.success .message,
+.input-group.fail .message {
+  visibility: visible;
+}
+
+.input-group.success .message {
+  color: hsl(var(--dark-green))
+}
+
+.input-group.fail .message {
+  color: hsl(var(--dark-red))
+}
+
+.input-group input:focus {
+  /* border bikin size login box berubah */
+  /* border: 1px solid hsl(var(--dark-brown)); */
+  box-shadow: 0 0 0 1.5px hsl(var(--dark-brown), .7);
+}
+
+.login-button {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding: .5em;
+  font-size: 1rem;
+  color: hsl(var(--dark-brown));
+  background-color: hsl(var(--brown), .4);
+  border: 2px solid hsl(var(--dark-brown), .8);
+  border-radius: 1em;
+  outline: none;
+  cursor: pointer;
+}
+
+.login-button:hover, .login-button:focus {
+  background-color: hsl(var(--dark-brown), .5);
+  color: hsl(var(--light-brown), .8);
+}
